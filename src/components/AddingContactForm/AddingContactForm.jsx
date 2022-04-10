@@ -1,5 +1,6 @@
 import React from 'react';
  import { Formik } from 'formik';
+ import {AddingForm} from './AddingContactForm.styled';
  
  export const AddingContactForm = () => (
    <div>
@@ -33,7 +34,7 @@ import React from 'react';
          isSubmitting,
          /* and other goodies */
        }) => (
-         <form onSubmit={handleSubmit}>
+         <AddingForm onSubmit={handleSubmit}>
             <label>Name</label>
            <input
              type="text"
@@ -46,7 +47,7 @@ import React from 'react';
            <button type="submit" disabled={isSubmitting}>
            Add contact
            </button>
-         </form>
+         </AddingForm>
        )}
      </Formik>
    </div>
