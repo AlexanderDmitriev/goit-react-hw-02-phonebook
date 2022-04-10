@@ -13,3 +13,20 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+/**Небольшой RESET после нормализации*/
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+ul {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-left: 0px;
+}
