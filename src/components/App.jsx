@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types'; 
 import {AddingContactForm} from './AddingContactForm/AddingContactForm';
-import {Title} from './App.styled';
+import {Title, Container} from './App.styled';
 import {ContactList} from './ContactList/ContactList';
 import {ContactFilter} from './Filter/ContactFilter';
 
@@ -28,9 +28,20 @@ export class App extends Component{
     return contactObject;
   };
 
+  contactAntiDuplicator = (name) => {
+    const normalizedName=name.toLowerCase();
+    return this.state.contacts.some
+        (contactName => normalizedName===contactName.name.toLowerCase());
+
+  };
+
   addContact = (data) => {
     const newContact=this.makingContact(data);
-    this.setState(prevState => ({ contacts:[newContact, ...prevState.contacts]}));
+    if (this.contactAntiDuplicator(newContact.name)) {
+      window.alert(`${newContact.name} is already in contacts`);
+      return;
+    } else {
+      this.setState(prevState => ({ contacts:[newContact, ...prevState.contacts]}));} 
   };
 
   changeFilter = (event) => {
@@ -44,23 +55,23 @@ export class App extends Component{
    );
 
     return (
-      <>
-      <Title>Phonebook</Title>
-      <AddingContactForm
-          onSubmit={this.addContact}
-      />
-      <Title>Contacts</Title>
-      <ContactFilter
-        filterValue={this.state.filter}
-        onChange={this.changeFilter}
-      />
-      <ul>
-          <ContactList
-            contacts={visibleContacts}
-          />
-      </ul>
-      
-      </>
+      <Container>
+        <Title>Phonebook</Title>
+        <AddingContactForm
+            onSubmit={this.addContact}
+        />
+        <Title>Contacts</Title>
+        <ContactFilter
+          filterValue={this.state.filter}
+          onChange={this.changeFilter}
+        />
+        <ul>
+            <ContactList
+              contacts={visibleContacts}
+            />
+        </ul>
+        
+      </Container>
       
     );
   };

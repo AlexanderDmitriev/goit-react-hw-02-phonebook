@@ -23,3 +23,6 @@ export const InputOnContactForm = styled.input`
         background-color: ${props => props.theme.colors.focusColor};
     }
 `;
+export const Container = styled.section`
+    padding: ${props => props.theme.spacing(5)};
+`;
