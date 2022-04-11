@@ -1,26 +1,58 @@
 import React, { Component } from "react";
-import { nanoid } from 'nanoid'
-import {AddingContactForm} from './AddingContactForm/AddingContactForm'
+import { nanoid } from 'nanoid';
+import PropTypes from 'prop-types'; 
+import {AddingContactForm} from './AddingContactForm/AddingContactForm';
+import {Title} from './App.styled';
+import {ContactList} from './ContactList/ContactList';
+import {ContactFilter} from './Filter/ContactFilter';
 
 export class App extends Component{
   state = {
-    contacts: [],
-    name: '',
-    number: ''
+    contacts: 
+      [
+        {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
+        {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
+        {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
+        {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
+      ],
+    filter: '',
+    name: 'Alex',
+    number: '911'
   }
-  modelId = nanoid();
+
+  makingContact = () => {
+    const contactObject={};
+    contactObject.id=nanoid();
+    contactObject.name=this.state.name;
+    contactObject.number=this.state.number;
+    this.setState({contacts: contactObject});
+  };
+
+  changeFilter = (event) => {
+    this.setState({filter: event.currentTarget.value});
+};
 
   render(){
+    const normalizedFilter = this.state.filter.toLowerCase();
+    const visibleContacts = this.state.contacts.filter(
+      data => data.name.toLowerCase().includes(normalizedFilter)
+   );
+
     return (
       <>
-      <h2>Phonebook</h2>
+      <Title>Phonebook</Title>
       <AddingContactForm/>
-      <h2>Contacts</h2>
+      <Title>Contacts</Title>
+      <ContactFilter
+        filterValue={this.state.filter}
+        onChange={this.changeFilter}
+      />
       <ul>
-        <li>Adrian</li>
-        <li>Jacob Mercer</li>
-        <li>Charles de Batz de Castelmore d'Artagnan</li>
+          <ContactList
+            contacts={visibleContacts}
+          />
       </ul>
+      
       </>
       
     );
@@ -28,3 +60,7 @@ export class App extends Component{
   
     
 };
+
+
+
+ContactList.propTypes={contacts:PropTypes.array};
