@@ -9,3 +9,7 @@ export const ContactListItem =  styled.li`
     line-height: 1.2;
     color: ${props => props.theme.colors.textColor}
 `;
+
+export const DeleteButton = styled.button`
+    margin: 0 ${props => props.theme.spacing(2)};
+`;

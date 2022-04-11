@@ -1,9 +1,9 @@
 import React from "react";
-import {InputOnContactForm} from '../App.styled';
+import {InputOnContactForm, LabelText} from '../App.styled';
 
 export const ContactFilter = ({filterValue, onChange}) => {
     return (
-        <label htmlFor="filter">Search
+        <LabelText htmlFor="filter">Search
             <InputOnContactForm
                 type="text"
                 name="filter"
@@ -11,6 +11,6 @@ export const ContactFilter = ({filterValue, onChange}) => {
                 value={filterValue}
                 onChange={onChange}      
             />
-        </label>
+        </LabelText>
     );
 };

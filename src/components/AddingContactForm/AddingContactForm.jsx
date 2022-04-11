@@ -2,6 +2,7 @@ import React, { Component } from "react";
  import { Formik, Form, Field, ErrorMessage   } from 'formik';
  import * as yup from 'yup';
  import styled from '@emotion/styled';
+ import {LabelText} from '../App.styled';
  import {AddingForm,SubmitButton,StyledErrorMessage} from './AddingContactForm.styled';
 
  const schema = yup.object().shape({
@@ -47,7 +48,7 @@ import React, { Component } from "react";
           }) => (
               <AddingForm>
                   <Form onSubmit={handleSubmit}>
-                    <label htmlFor="name">Name</label>
+                    <LabelText htmlFor="name">Name
                     <ToFormikInput
                       type="text"
                       name="name"
@@ -57,7 +58,8 @@ import React, { Component } from "react";
                         name="name"
                         render={msg => <StyledErrorMessage>{"Incorrect name"}</StyledErrorMessage>}
                      />
-                    <label htmlFor="number">Number
+                     </LabelText>
+                    <LabelText htmlFor="number">Number
                     <ToFormikInput
                       type="tel"
                       name="number"
@@ -67,7 +69,7 @@ import React, { Component } from "react";
                     <ErrorMessage 
                         name="number" 
                         render={msg => <StyledErrorMessage>{"Incorrect number"}</StyledErrorMessage>}/>
-                    </label>
+                    </LabelText>
                     <SubmitButton type="submit" disabled={isSubmitting}>
                     Add contact
                     </SubmitButton>
