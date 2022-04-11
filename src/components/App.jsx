@@ -16,16 +16,21 @@ export class App extends Component{
         {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
       ],
     filter: '',
-    name: 'Alex',
-    number: '911'
+    name: '',
+    number: ''
   }
 
-  makingContact = () => {
+  makingContact = ({name,number}) => {
     const contactObject={};
     contactObject.id=nanoid();
-    contactObject.name=this.state.name;
-    contactObject.number=this.state.number;
-    this.setState({contacts: contactObject});
+    contactObject.name=name;
+    contactObject.number=number;
+    return contactObject;
+  };
+
+  addContact = (data) => {
+    const newContact=this.makingContact(data);
+    this.setState(prevState => ({ contacts:[newContact, ...prevState.contacts]}));
   };
 
   changeFilter = (event) => {
@@ -41,7 +46,9 @@ export class App extends Component{
     return (
       <>
       <Title>Phonebook</Title>
-      <AddingContactForm/>
+      <AddingContactForm
+          onSubmit={this.addContact}
+      />
       <Title>Contacts</Title>
       <ContactFilter
         filterValue={this.state.filter}
