@@ -1,7 +1,7 @@
 import React from "react";
 import {InputOnContactForm, LabelText} from '../App.styled';
 
-export const ContactFilter = ({filterValue, onChange}) => {
+export const Filter  = ({filterValue, onChange}) => {
     return (
         <LabelText htmlFor="filter">Search
             <InputOnContactForm

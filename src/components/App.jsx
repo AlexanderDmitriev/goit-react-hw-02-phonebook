@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types'; 
-import {AddingContactForm} from './AddingContactForm/AddingContactForm';
+import {ContactForm } from './AddingContactForm/AddingContactForm';
 import {Title, Container} from './App.styled';
 import {ContactList} from './ContactList/ContactList';
-import {ContactFilter} from './Filter/ContactFilter';
+import {Filter } from './Filter/ContactFilter';
 
 export class App extends Component{
   state = {
@@ -16,17 +16,7 @@ export class App extends Component{
         {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
       ],
     filter: '',
-    name: '',
-    number: ''
   }
-
-  makingContact = ({name,number}) => {
-    const contactObject={};
-    contactObject.id=nanoid();
-    contactObject.name=name;
-    contactObject.number=number;
-    return contactObject;
-  };
 
   contactAntiDuplicator = (name) => {
     const normalizedName=name.toLowerCase();
@@ -35,8 +25,11 @@ export class App extends Component{
 
   };
 
-  addContact = (data) => {
-    const newContact=this.makingContact(data);
+  addContact = ({name,number}) => {
+    const newContact={
+      id:nanoid(),
+      name: name,
+      number: number};
     if (this.contactAntiDuplicator(newContact.name)) {
       window.alert(`${newContact.name} is already in contacts`);
       return;
@@ -63,23 +56,19 @@ export class App extends Component{
     return (
       <Container>
         <Title>Phonebook</Title>
-        <AddingContactForm
+        <ContactForm 
             onSubmit={this.addContact}
         />
         <Title>Contacts</Title>
-        <ContactFilter
+        <Filter 
           filterValue={this.state.filter}
           onChange={this.changeFilter}
         />
-        <ul>
             <ContactList
               contacts={visibleContacts}
               onDeleteContact={this.deleteContact}
             />
-        </ul>
-        
       </Container>
-      
     );
   };
   
